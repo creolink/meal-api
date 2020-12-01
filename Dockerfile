@@ -1,4 +1,4 @@
-FROM php:7.4
+FROM php:7.4-fpm-alpine
 WORKDIR /app
 
 #RUN wget https://github.com/FriendsOfPHP/pickle/releases/download/v0.6.0/pickle.phar \
@@ -13,6 +13,15 @@ WORKDIR /app
 #        intl \
 #        zip \
 #        pdo_mysql
+
+RUN apk --update upgrade \
+    && apk add --no-cache autoconf automake make gcc g++ bash icu-dev libzip-dev \
+    && docker-php-ext-install -j$(nproc) \
+        bcmath \
+        intl \
+        zip \
+        mysqli \
+        pdo_mysql
 
 #RUN pickle install apcu-5.1.19
 
