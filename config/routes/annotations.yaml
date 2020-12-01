@@ -1,0 +1,8 @@
+auth_controllers:
+    resource: ../../src/Security/Controller/
+    type: annotation
+
+meal_controllers:
+    resource: ../../src/Meal/Api/
+    type: annotation
+
