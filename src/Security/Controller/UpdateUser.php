@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Meal\Api;
+namespace App\Security\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CreateMeal
+class UpdateUser
 {
     /**
-     * @Route("/meal", methods={"POST"})
+     * @Route("/user/{uuid}", methods={"PUT"})
      */
     public function __invoke(): Response
     {
-        return new Response("meal created");
+        return new Response("user");
     }
 }

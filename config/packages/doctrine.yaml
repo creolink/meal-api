@@ -16,3 +16,10 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Security/Domain/Model/Entity'
                 prefix: 'App\Security\Domain\Model\Entity'
                 alias: App\Security
+
+            Meal:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Meal/Domain/Model/Entity'
+                prefix: 'App\Meal\Domain\Model\Entity'
+                alias: App\Security

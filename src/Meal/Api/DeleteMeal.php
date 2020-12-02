@@ -5,13 +5,13 @@ namespace App\Meal\Api;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CreateMeal
+class DeleteMeal
 {
     /**
-     * @Route("/meal", methods={"POST"})
+     * @Route("/meal/{uuid}", methods={"DELETE"})
      */
     public function __invoke(): Response
     {
-        return new Response("meal created");
+        return new Response("meal deleted");
     }
 }

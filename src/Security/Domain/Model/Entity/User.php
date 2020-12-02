@@ -36,6 +36,11 @@ class User implements UserInterface
      */
     private string $password;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private string $country;
+
     public function getId(): UuidInterface
     {
         return $this->id;
