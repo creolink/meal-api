@@ -1,8 +1,17 @@
-auth_controllers:
+security:
     resource: ../../src/Security/Controller/
     type: annotation
+    defaults:
+        _format: json
 
-meal_controllers:
+backoffice:
+    resource: ../../src/BackOffice/Controller/
+    type: annotation
+    defaults:
+        _format: json
+
+meal:
     resource: ../../src/Meal/Api/
     type: annotation
-
+    defaults:
+        _format: json

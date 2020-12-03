@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     jwt_secret: testsecret
+    api_show_stack_trace: false
 
 services:
     # default configuration for services in *this* file
@@ -28,9 +29,19 @@ services:
         resource: '../src/Security/Controller/'
         tags: ['controller.service_arguments']
 
+    App\BackOffice\Controller\:
+        resource: '../src/BackOffice/Controller/'
+        tags: ['controller.service_arguments']
+
     App\Meal\Api\:
         resource: '../src/Meal/Api/'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Shared\Infrastructure\EventListener\ApiExceptionListener:
+        arguments:
+            - "%api_show_stack_trace%"
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
