@@ -2,9 +2,9 @@
 
 namespace App\Meal\Domain\Model\Entity;
 
-use App\Security\Domain\Model\Entity\User;
 use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 
@@ -47,16 +47,16 @@ class Meal
     private bool $isPublic;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=MealUser::class)
      */
-    public User $owner;
+    public UserInterface $owner;
 
     public function getId(): UuidInterface
     {
         return $this->id;
     }
 
-    public function setId(UuidInterface $id): Meal
+    public function setId(UuidInterface $id): self
     {
         $this->id = $id;
 
@@ -68,7 +68,7 @@ class Meal
         return $this->title;
     }
 
-    public function setTitle(string $title): Meal
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
@@ -80,7 +80,7 @@ class Meal
         return $this->type;
     }
 
-    public function setType(string $type): Meal
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -92,7 +92,7 @@ class Meal
         return $this->calories;
     }
 
-    public function setCalories(int $calories): Meal
+    public function setCalories(int $calories): self
     {
         $this->calories = $calories;
 
@@ -104,20 +104,21 @@ class Meal
         return $this->isPublic;
     }
 
-    public function setIsPublic(bool $isPublic): Meal
+    public function setIsPublic(bool $isPublic): self
     {
         $this->isPublic = $isPublic;
         return $this;
     }
 
-    public function getOwner(): User
+    public function getOwner(): UserInterface
     {
         return $this->owner;
     }
 
-    public function setOwner(User $owner): Meal
+    public function setOwner(UserInterface $owner): self
     {
         $this->owner = $owner;
+
         return $this;
     }
 }

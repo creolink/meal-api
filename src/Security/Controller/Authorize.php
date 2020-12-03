@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class Authorize
 {
     /**
-     * @Route("/authorize", methods={"POST"})
+     * @Route("/api/authorize", methods={"POST"})
      */
     public function __invoke(): Response
     {

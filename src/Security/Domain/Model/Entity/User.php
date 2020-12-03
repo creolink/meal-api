@@ -2,9 +2,11 @@
 
 namespace App\Security\Domain\Model\Entity;
 
+use App\Security\Domain\Model\UserRoles;
 use App\Security\Infrastructure\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 
@@ -23,6 +25,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private string $email;
 
@@ -33,11 +39,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
      */
     private string $password;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
      */
     private string $country;
 
@@ -66,14 +74,15 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_USER';
+        $roles[] = UserRoles::ROLE_USER;
 
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(array $roles = []): self
     {
-        $this->roles = $roles;
+        $roles[] = UserRoles::ROLE_USER;
+        $this->roles = array_unique($roles);
 
         return $this;
     }
@@ -86,6 +95,18 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

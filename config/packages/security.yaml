@@ -1,21 +1,25 @@
 security:
+    role_hierarchy:
+        ROLE_USER:
+            - ROLE_OWNED_MEALS_EDIT
+            - ROLE_OWNED_USER_EDIT
+        ROLE_ADMIN:
+            - ROLE_ALL_USERS_EDIT
+            - ROLE_ALL_MEALS_EDIT
+        ROLE_MODERATOR:
+            - ROLE_ALL_USERS_EDIT
+            - ROLE_OWNED_MEALS_EDIT
+
     encoders:
         App\Security\Domain\Model\Entity\User:
             algorithm: bcrypt
-        App\Entity\Admin:
-            algorithm: auto
-
-
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\Admin
+                class: App\Security\Domain\Model\Entity\User
                 property: email
-        # used to reload user from session & other features (e.g. switch_user)
-        # used to reload user from session & other features (e.g. switch_user)
 
     firewalls:
         dev:
@@ -27,7 +31,7 @@ security:
             stateless: true
             anonymous: true
             json_login:
-                check_path: /api/login_check
+                check_path: /api/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
@@ -61,8 +65,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/(meal|meals), roles: [IS_AUTHENTICATED_FULLY, ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/(user|users), roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN, ROLE_MODERATOR] }
