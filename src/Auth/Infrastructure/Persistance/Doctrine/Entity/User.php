@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Security\Domain\Model\Entity;
+namespace App\Auth\Infrastructure\Doctrine\Entity;
 
-use App\Security\Domain\Model\UserRoles;
-use App\BackOffice\Infrastructure\Repository\UserRepository;
+use App\Auth\Domain\Model\UserRoles;
+use App\Auth\Infrastructure\Persistance\Doctrine\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Validator\Constraints as Assert;

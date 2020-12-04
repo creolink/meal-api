@@ -1,9 +1,9 @@
 <?php
 
-namespace App\BackOffice\Infrastructure\Repository;
+namespace App\Auth\Infrastructure\Persistance\Doctrine\Repository;
 
 use App\BackOffice\Application\CreateUserRepositoryInterface;
-use App\BackOffice\Domain\Exception\InvalidUserDataException;
+use App\Auth\Domain\Exception\InvalidUserDataException;
 use App\Security\Domain\Model\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\BackOffice\Infrastructure\Repository\UserRepositoryInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)

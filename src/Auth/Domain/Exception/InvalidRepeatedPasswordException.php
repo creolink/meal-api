@@ -1,6 +1,6 @@
 <?php
 
-namespace App\BackOffice\Domain\Exception;
+namespace App\Auth\Domain\Exception;
 
 class InvalidRepeatedPasswordException extends \RuntimeException
 {

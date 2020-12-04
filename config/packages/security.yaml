@@ -18,7 +18,7 @@ security:
     providers:
         app_user_provider:
             entity:
-                class: App\Security\Domain\Model\Entity\User
+                class: App\Auth\Domain\Model\Entity\User
                 property: email
 
     firewalls:
@@ -27,16 +27,16 @@ security:
             security: false
 
         login:
-            pattern:  ^/api/login
+            pattern:  ^/auth/login
             stateless: true
             anonymous: true
             json_login:
-                check_path: /api/login
+                check_path: /auth/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
         register:
-            pattern:  ^/api/register
+            pattern:  ^/auth/register
             stateless: true
             anonymous: true
 
@@ -65,8 +65,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/auth/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/(meal|meals), roles: [IS_AUTHENTICATED_FULLY, ROLE_USER, ROLE_ADMIN] }
         - { path: ^/(user|users), roles: [IS_AUTHENTICATED_FULLY, ROLE_ADMIN, ROLE_MODERATOR] }

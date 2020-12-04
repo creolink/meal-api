@@ -1,6 +1,6 @@
 <?php
 
-namespace App\BackOffice\Domain\Exception;
+namespace App\Catalog\Domain\Exception;
 
 class InvalidUserDataException extends \RuntimeException
 {

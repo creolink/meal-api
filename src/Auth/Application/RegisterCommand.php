@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Catalog\Auth\Domain\Model\Dto;
+namespace App\Auth\Application;
 
 use App\Catalog\Domain\Exception\InvalidRepeatedPasswordException;
 use Symfony\Component\Validator\Constraints as Assert;
+use Shared\Domain\Bus\Command\Command;
 
-class UserDto
+class RegisterCommand implements Command
 {
     /**
      * @Assert\NotBlank

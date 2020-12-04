@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Meal\Api;
+namespace App\Catalog\Meals\UI\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

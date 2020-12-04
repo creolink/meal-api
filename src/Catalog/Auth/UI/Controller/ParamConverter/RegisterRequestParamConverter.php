@@ -1,18 +1,18 @@
 <?php
 
-namespace App\BackOffice\Controller\ParamConverter;
+namespace App\Catalog\Auth\UI\ParamConverter;
 
-use App\BackOffice\Domain\Dto\NewUser;
-use App\BackOffice\Domain\Exception\InvalidUserDataException;
+use App\Catalog\Auth\Application\Controller\RegisterCommand;
+use App\Catalog\Domain\Exception\InvalidUserDataException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class UserDtoParamConverter implements ParamConverterInterface
+class RegisterRequestParamConverter implements ParamConverterInterface
 {
-    public const CONVERTER_NAME = 'userDto';
+    public const CONVERTER_NAME = 'registerCommand';
 
     private UserPasswordEncoderInterface $encoder;
     private ValidatorInterface $validator;
@@ -42,9 +42,9 @@ class UserDtoParamConverter implements ParamConverterInterface
         return $configuration->getName() === self::CONVERTER_NAME;
     }
 
-    private function createUserDto(Request $request): NewUser
+    private function createUserDto(Request $request): RegisterCommand
     {
-        return new NewUser(
+        return new RegisterCommand(
             $request->get('email'),
             $request->get('password'),
             $request->get('repeated_password'),
@@ -52,7 +52,7 @@ class UserDtoParamConverter implements ParamConverterInterface
         );
     }
 
-    private function validate(NewUser $userDto): void
+    private function validate(RegisterCommand $userDto): void
     {
         $errors = $this->validator->validate($userDto);
 
@@ -62,28 +62,4 @@ class UserDtoParamConverter implements ParamConverterInterface
             throw new InvalidUserDataException($errorsString);
         }
     }
-
-//    private function createUserDto(Request $request): User
-//    {
-//        $user = new CreateUser();
-//
-//        return $user
-//            ->setEmail($request->get('email'))
-//            ->setPassword($this->encoder->encodePassword($user, $request->get('password')))
-//            ->setRoles([])
-//            ->setCountryOfOrigin($request->get('country'))
-//            ;
-//    }
-//
-//    private function createUser(Request $request): User
-//    {
-//        $user = new CreateUser();
-//
-//        return $user
-//            ->setEmail($request->get('email'))
-//            ->setPassword($this->encoder->encodePassword($user, $request->get('password')))
-//            ->setRoles([])
-//            ->setCountryOfOrigin($request->get('country'))
-//        ;
-//    }
 }

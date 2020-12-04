@@ -1,9 +1,9 @@
 <?php
 
-namespace App\BackOffice\Controller;
+namespace App\Catalog\Auth\UI\Controller;
 
-use App\BackOffice\Application\Register\UserCreator;
-use App\BackOffice\Domain\Dto\NewUser;
+use App\Auth\Application\RegisterCommandHandler;
+use App\Catalog\Auth\Application\Controller\RegisterCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,13 +13,11 @@ class Register
 {
     /**
      * @Route("/auth/register", name="register", methods={"POST"})
-     * @ParamConverter("userDto")
+     * @ParamConverter("registerCommand")
      */
-    public function __invoke(UserDto $userDto, UserCreator $creator): Response
+    public function __invoke(RegisterCommand $registerCommand, RegisterCommandHandler $commandHandler): Response
     {
-        //$userChecker->check();
-
-        $user = $creator->register($userDto);
+        $user = $commandHandler->handle($registerCommand);
 
         return new JsonResponse([
             'user' => $user->getEmail()

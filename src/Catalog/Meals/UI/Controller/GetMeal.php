@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Meal\Api;
+namespace App\Catalog\Meals\UI\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GetMeals
+class GetMeal
 {
     /**
-     * @Route("/meal", methods={"GET"})
+     * @Route("/meal/{uuid}", methods={"GET"})
      */
     public function __invoke(): Response
     {
-        return new Response("meals");
+        return new Response("meal");
     }
 }

@@ -25,22 +25,22 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Security\Controller\:
-        resource: '../src/Security/Controller/'
+    App\BackOffice\Catalog\Application\Controller\:
+        resource: '../src/BackOffice/Catalog/Application/Controller/'
         tags: ['controller.service_arguments']
-
-    App\BackOffice\Controller\:
-        resource: '../src/BackOffice/Controller/'
-        tags: ['controller.service_arguments']
-
-    App\Meal\Api\:
-        resource: '../src/Meal/Api/'
-        tags: ['controller.service_arguments']
+#
+#    App\BackOffice\Controller\:
+#        resource: '../src/BackOffice/Controller/'
+#        tags: ['controller.service_arguments']
+#
+#    App\Meal\Api\:
+#        resource: '../src/Meal/Api/'
+#        tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Shared\Infrastructure\EventListener\ApiExceptionListener:
+    App\Shared\Infrastructure\Framework\EventListener\ApiExceptionListener:
         arguments:
             - "%api_show_stack_trace%"
         tags:

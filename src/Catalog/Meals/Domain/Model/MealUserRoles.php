@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Meal\Domain\Model;
+namespace App\Catalog\Meals\Domain\Model;
 
 interface MealUserRoles
 {

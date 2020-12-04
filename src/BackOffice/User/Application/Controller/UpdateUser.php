@@ -1,6 +1,6 @@
 <?php
 
-namespace App\BackOffice\Controller;
+namespace App\BackOffice\User\Application\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

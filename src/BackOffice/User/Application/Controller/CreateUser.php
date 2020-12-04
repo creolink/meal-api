@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Meal\Api;
+namespace App\BackOffice\User\Application\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CreateMeal
+class CreateUser
 {
     /**
-     * @Route("/meal", methods={"POST"})
+     * @Route("/adm/user", methods={"POST"})
      */
     public function __invoke(): Response
     {
-        return new Response("meal created");
+        return new Response("users");
     }
 }

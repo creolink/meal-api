@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Security\Domain\Model;
+namespace App\Auth\Domain\Model;
 
 interface UserRoles
 {

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\BackOffice\Domain\Dto;
+namespace App\Catalog\Auth\Application\Controller;
 
-use App\BackOffice\Domain\Exception\InvalidRepeatedPasswordException;
+use App\Catalog\Domain\Exception\InvalidRepeatedPasswordException;
 use Symfony\Component\Validator\Constraints as Assert;
+use Shared\Domain\Bus\Command\Command;
 
-class UserDto
+class RegisterCommand implements Command
 {
     /**
      * @Assert\NotBlank
@@ -63,36 +64,6 @@ class UserDto
     {
         return $this->country;
     }
-
-//    public function setEmail(string $email): self
-//    {
-//        $this->email = $email;
-//
-//        return $this;
-//    }
-//
-//    public function setPassword(string $password): self
-//    {
-//        $this->password = $password;
-//
-//        return $this;
-//    }
-//
-//    public function setRepeatedPassword(string $repeatedPassword): self
-//    {
-//        $this->repeatedPassword = $repeatedPassword;
-//
-//        $this->validatePasswords();
-//
-//        return $this;
-//    }
-//
-//    public function setCountry(string $country): self
-//    {
-//        $this->country = $country;
-//
-//        return $this;
-//    }
 
     private function validatePasswords(): void
     {
