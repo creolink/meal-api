@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Catalog\Auth\UI\Controller;
+namespace App\Auth\UI\Controller;
 
 use App\Auth\Application\RegisterCommand;
 use App\Auth\Application\RegisterCommandHandler;

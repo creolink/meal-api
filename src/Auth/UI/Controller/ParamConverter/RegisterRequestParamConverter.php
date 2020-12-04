@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Catalog\Auth\UI\ParamConverter;
+namespace App\Auth\UI\Controller\ParamConverter;
 
-use App\Catalog\Auth\Application\Controller\RegisterCommand;
-use App\Catalog\Domain\Exception\InvalidUserDataException;
+use App\Auth\Application\RegisterCommand;
+use App\Auth\Domain\Exception\InvalidUserDataException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;

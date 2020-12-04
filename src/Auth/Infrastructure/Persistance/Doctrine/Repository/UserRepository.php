@@ -4,7 +4,7 @@ namespace App\Auth\Infrastructure\Persistance\Doctrine\Repository;
 
 use App\Auth\Domain\CreateUserRepositoryInterface;
 use App\Auth\Domain\Exception\InvalidUserDataException;
-use App\Auth\Infrastructure\Persistance\Doctrine\Entity\User;
+use App\Auth\Domain\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;

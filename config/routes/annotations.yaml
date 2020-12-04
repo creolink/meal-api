@@ -1,5 +1,11 @@
-controllers:
-    resource: ../../src/*/Controller/
+catalog:
+    resource: ../../src/Catalog/UI/Controller/
+    type: annotation
+    defaults:
+        _format: json
+
+auth:
+    resource: ../../src/Auth/UI/Controller/
     type: annotation
     defaults:
         _format: json
