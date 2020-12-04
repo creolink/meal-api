@@ -1,10 +1,10 @@
 <?php
 
-namespace App\BackOffice\Application;
+namespace App\Auth\Domain;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
 interface CreateUserRepositoryInterface
 {
-    public function createNewUser(UserInterface $user): UserInterface;
+    public function create(UserInterface $user);
 }

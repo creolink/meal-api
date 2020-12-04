@@ -2,18 +2,31 @@
 
 namespace App\Auth\Application;
 
-use App\Auth\Infrastructure\Doctrine\Entity\User;
-use Shared\Domain\Bus\Command\Command;
+use App\Auth\Domain\CreateUserService;
+use App\Auth\Domain\Register\RegisterUserDto;
+use App\Auth\Domain\UserCountry;
+use App\Auth\Domain\UserEmail;
+use App\Auth\Domain\UserPassword;
 use Shared\Domain\Bus\Command\CommandHandler;
 
 class RegisterCommandHandler implements CommandHandler
 {
-    public function __construct()
+    private CreateUserService $registerUserBusiness;
+
+    public function __construct(CreateUserService $registerUserBusiness)
     {
+        $this->registerUserBusiness = $registerUserBusiness;
     }
 
-    public function handle(Command $registerCommand): User
+    public function handle(RegisterCommand $registerCommand): void
     {
-
+        $this->registerUserBusiness->create(
+            new RegisterUserDto(
+                new UserEmail($registerCommand->getEmail()),
+                new UserPassword($registerCommand->getPassword()),
+                new UserPassword($registerCommand->getRepeatedPassword()),
+                new UserCountry($registerCommand->getCountry())
+            )
+        );
     }
 }

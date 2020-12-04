@@ -18,7 +18,7 @@ security:
     providers:
         app_user_provider:
             entity:
-                class: App\Auth\Domain\Model\Entity\User
+                class: App\Auth\Infrastructure\Persistance\Doctrine\Entity\User
                 property: email
 
     firewalls:

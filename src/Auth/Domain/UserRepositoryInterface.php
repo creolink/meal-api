@@ -1,10 +1,10 @@
 <?php
 
-namespace App\BackOffice\Infrastructure\Repository;
+namespace App\Auth\Domain;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-interface UserRepositoryInterface
+interface UpgradeUserPasswordRepositoryInterface
 {
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void;
 }

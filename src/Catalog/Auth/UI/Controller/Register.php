@@ -2,8 +2,8 @@
 
 namespace App\Catalog\Auth\UI\Controller;
 
+use App\Auth\Application\RegisterCommand;
 use App\Auth\Application\RegisterCommandHandler;
-use App\Catalog\Auth\Application\Controller\RegisterCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,10 +17,10 @@ class Register
      */
     public function __invoke(RegisterCommand $registerCommand, RegisterCommandHandler $commandHandler): Response
     {
-        $user = $commandHandler->handle($registerCommand);
+        $commandHandler->handle($registerCommand);
 
         return new JsonResponse([
-            'user' => $user->getEmail()
+            'user' => $registerCommand->getEmail()
         ]);
     }
 }

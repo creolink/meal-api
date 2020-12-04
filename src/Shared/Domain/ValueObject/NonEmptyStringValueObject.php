@@ -3,9 +3,13 @@
 declare(strict_types=1);
 
 namespace App\Shared\Domain\ValueObject;
+use Symfony\Component\Validator\Constraints as Assert;
 
-abstract class StringValueObject
+abstract class NonEmptyStringValueObject
 {
+    /**
+     * @Assert\NotBlank
+     */
     protected string $value;
 
     public function __construct(string $value)

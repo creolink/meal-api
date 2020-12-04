@@ -2,16 +2,15 @@
 
 namespace App\Auth\Infrastructure\Persistance\Doctrine\Repository;
 
-use App\BackOffice\Application\CreateUserRepositoryInterface;
+use App\Auth\Domain\CreateUserRepositoryInterface;
 use App\Auth\Domain\Exception\InvalidUserDataException;
-use App\Security\Domain\Model\Entity\User;
+use App\Auth\Infrastructure\Persistance\Doctrine\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use App\BackOffice\Infrastructure\Repository\UserRepositoryInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,7 +18,7 @@ use App\BackOffice\Infrastructure\Repository\UserRepositoryInterface;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, CreateUserRepositoryInterface, UserRepositoryInterface
+class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, CreateUserRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -37,7 +36,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user);
     }
 
-    public function createNewUser(UserInterface $user): UserInterface
+    public function create(UserInterface $user): UserInterface
     {
         $this->save($user);
 

@@ -1,14 +1,11 @@
 <?php
 
-namespace App\BackOffice\Application\Register;
+namespace App\Auth\Domain;
 
-use App\BackOffice\Application\CreateUserRepositoryInterface;
-use App\BackOffice\Domain\Dto\NewUser;
-use App\Security\Domain\Model\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserCreator
+class CreateUserService
 {
     private CreateUserRepositoryInterface $repository;
     private UserPasswordEncoderInterface $encoder;
@@ -19,18 +16,18 @@ class UserCreator
         $this->encoder = $encoder;
     }
 
-    public function create(NewUser $userDto): UserInterface
+    public function create(UserType $userDto): void
     {
         $user = new User();
-        $user->setPassword($this->encodePassword($user, $userDto));
+        $user->setPassword($this->encodePassword($user, $userDto->getPassword()->value()));
         $user->setEmail($userDto->getEmail());
         $user->setCountry($userDto->getCountry());
 
-        return $this->repository->createNewUser($user);
+        $this->repository->create($user);
     }
 
-    private function encodePassword(UserInterface $user, NewUser $newUser)
+    private function encodePassword(UserInterface $user, string $newUser)
     {
-        return $this->encoder->encodePassword($user, $newUser->getPassword());
+        return $this->encoder->encodePassword($user, $newUser);
     }
 }
