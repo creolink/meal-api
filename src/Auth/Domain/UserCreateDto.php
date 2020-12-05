@@ -1,14 +1,10 @@
 <?php
 
-namespace App\Auth\Domain\Create;
+namespace App\Auth\Domain;
 
-use App\Auth\Domain\UserCountry;
-use App\Auth\Domain\UserEmail;
-use App\Auth\Domain\UserPassword;
-use App\Auth\Domain\UserType;
 use Shared\Domain\Aggregate\AggregateRoot;
 
-class CreateUserDto implements AggregateRoot, UserType
+class UserCreateDto implements AggregateRoot, UserType
 {
     private UserEmail $email;
     private UserPassword $password;

@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Auth\Domain\Register;
+namespace App\Auth\Domain;
 
-use App\Auth\Domain\Create\CreateUserDto;
 use App\Auth\Domain\Exception\InvalidRepeatedPasswordException;
-use App\Auth\Domain\UserCountry;
-use App\Auth\Domain\UserEmail;
-use App\Auth\Domain\UserPassword;
-use App\Auth\Domain\UserType;
 use Shared\Domain\Aggregate\AggregateRoot;
 
-class RegisterUserDto extends CreateUserDto implements AggregateRoot, UserType
+class UserRegisterDto extends UserCreateDto implements AggregateRoot, UserType
 {
     private UserPassword $repeatedPassword;
 
@@ -29,7 +24,7 @@ class RegisterUserDto extends CreateUserDto implements AggregateRoot, UserType
 
     private function validatePasswords(): void
     {
-        if ($this->getPassword() !== $this->repeatedPassword) {
+        if ($this->getPassword()->value() !== $this->repeatedPassword->value()) {
             throw new InvalidRepeatedPasswordException();
         }
     }

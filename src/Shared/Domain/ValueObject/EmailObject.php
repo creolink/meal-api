@@ -19,4 +19,9 @@ abstract class EmailObject
     {
         $this->email = $email;
     }
+
+    public function value(): string
+    {
+        return $this->email;
+    }
 }

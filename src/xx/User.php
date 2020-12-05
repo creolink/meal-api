@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Auth\Infrastructure\Persistance\Doctrine\Entity;
+namespace App\Auth\Infrastructure\Persistence\Doctrine\Entity;
 
-use App\Auth\Infrastructure\Persistance\Doctrine\Repository\UserRepository;
+use App\Auth\Infrastructure\Persistence\Doctrine\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Validator\Constraints as Assert;

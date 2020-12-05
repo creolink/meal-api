@@ -7,13 +7,11 @@ doctrine:
         #server_version: '13'
     orm:
         auto_generate_proxy_classes: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        auto_mapping: true
+#        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+#        auto_mapping: true
         mappings:
-            Security:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src'
-                prefix: 'App'
-                alias: App
-
+            App\Auth\Domain:
+                type: xml
+                dir: '%kernel.project_dir%/src/Auth/Infrastructure/Persistence/Doctrine/Entity'
+                prefix: 'App\Auth\Domain'
+                #alias: Auth

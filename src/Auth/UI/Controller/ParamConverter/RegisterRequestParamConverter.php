@@ -29,7 +29,7 @@ class RegisterRequestParamConverter implements ParamConverterInterface
             $userDto = $this->createUserDto($request);
             $this->validate($userDto);
         } catch (\Throwable $e) {
-            throw new InvalidUserDataException($e->getMessage(), 400);
+            throw new InvalidUserDataException($e->getMessage());
         }
 
         $request->attributes->set($configuration->getName(), $userDto);

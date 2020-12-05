@@ -3,13 +3,13 @@
 namespace App\Auth\Application;
 
 use App\Auth\Domain\CreateUserService;
-use App\Auth\Domain\Register\RegisterUserDto;
+use App\Auth\Domain\UserRegisterDto;
 use App\Auth\Domain\UserCountry;
 use App\Auth\Domain\UserEmail;
 use App\Auth\Domain\UserPassword;
 use Shared\Domain\Bus\Command\CommandHandler;
 
-class RegisterCommandHandler implements CommandHandler
+class RegisterCommandHandler// implements CommandHandler
 {
     private CreateUserService $registerUserBusiness;
 
@@ -21,7 +21,7 @@ class RegisterCommandHandler implements CommandHandler
     public function handle(RegisterCommand $registerCommand): void
     {
         $this->registerUserBusiness->create(
-            new RegisterUserDto(
+            new UserRegisterDto(
                 new UserEmail($registerCommand->getEmail()),
                 new UserPassword($registerCommand->getPassword()),
                 new UserPassword($registerCommand->getRepeatedPassword()),

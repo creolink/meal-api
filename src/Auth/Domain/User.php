@@ -2,6 +2,7 @@
 
 namespace App\Auth\Domain;
 
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -12,6 +13,11 @@ class User implements UserInterface
     private array $roles = [];
     private string $password;
     private string $country;
+
+    public function __construct()
+    {
+        $this->id = Uuid::uuid4();
+    }
 
     public function getId(): UuidInterface
     {

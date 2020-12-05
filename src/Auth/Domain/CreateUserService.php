@@ -20,8 +20,9 @@ class CreateUserService
     {
         $user = new User();
         $user->setPassword($this->encodePassword($user, $userDto->getPassword()->value()));
-        $user->setEmail($userDto->getEmail());
-        $user->setCountry($userDto->getCountry());
+        $user->setEmail($userDto->getEmail()->value());
+        $user->setCountry($userDto->getCountry()->value());
+        $user->setRoles([UserRoles::ROLE_USER]);
 
         $this->repository->create($user);
     }

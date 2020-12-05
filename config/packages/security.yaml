@@ -11,7 +11,7 @@ security:
             - ROLE_OWNED_MEALS_EDIT
 
     encoders:
-        App\Security\Domain\Model\Entity\User:
+        App\Auth\Domain\User:
             algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers

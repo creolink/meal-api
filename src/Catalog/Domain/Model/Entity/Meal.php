@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Catalog\Meals\Domain\Model\Entity;
+namespace App\Catalog\Domain\Model\Entity;
 
 use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping as ORM;

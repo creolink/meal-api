@@ -11,13 +11,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class Register
 {
+    private RegisterCommandHandler $commandHandler;
+
+    public function __construct(RegisterCommandHandler $commandHandler)
+    {
+        $this->commandHandler = $commandHandler;
+    }
+
     /**
      * @Route("/auth/register", name="register", methods={"POST"})
      * @ParamConverter("registerCommand")
      */
-    public function __invoke(RegisterCommand $registerCommand, RegisterCommandHandler $commandHandler): Response
+    public function __invoke(RegisterCommand $registerCommand): Response
     {
-        $commandHandler->handle($registerCommand);
+        $this->commandHandler->handle($registerCommand);
 
         return new JsonResponse([
             'user' => $registerCommand->getEmail()

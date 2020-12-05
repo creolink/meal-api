@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auth\Infrastructure\Persistance\Doctrine\Repository;
+namespace App\Auth\Infrastructure\Persistence\Doctrine\Repository;
 
 use App\Auth\Domain\CreateUserRepositoryInterface;
 use App\Auth\Domain\Exception\InvalidUserDataException;
@@ -52,7 +52,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $this->_em->persist($user);
             $this->_em->flush();
         } catch (ORMException $e) {
-            throw new InvalidUserDataException();
+            throw new InvalidUserDataException($e->getMessage());
         }
     }
 
