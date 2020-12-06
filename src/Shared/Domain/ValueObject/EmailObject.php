@@ -15,6 +15,11 @@ abstract class EmailObject extends StringValueObject
         $this->ensureEmailIsValid();
     }
 
+    public function __toString()
+    {
+        return $this->value;
+    }
+
     private function ensureEmailIsValid()
     {
         if (!filter_var($this->value, FILTER_VALIDATE_EMAIL)) {

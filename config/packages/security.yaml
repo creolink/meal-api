@@ -19,7 +19,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Auth\Domain\User
-                property: email
+                property: email.value
 
     firewalls:
         dev:
@@ -31,6 +31,7 @@ security:
             stateless: true
             anonymous: true
             json_login:
+                username_path: email
                 check_path: /auth/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure

@@ -6,7 +6,7 @@
 
     <entity name="App\Auth\Domain\User" table="user" repository-class="App\Auth\Infrastructure\Persistence\Doctrine\Repository\UserRepository">
         <id name="id" type="uuid" column="id" length="36" />
-        <field name="email" type="string" column="email" />
+        <embedded name="email" class="App\Auth\Domain\UserEmail" use-column-prefix="false" />
         <field name="roles" type="json_array" column="roles" />
         <field name="password" type="string" column="password" length="255" />
         <field name="country" type="string" column="country" length="3" />

@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     private UuidInterface $id;
-    private string $email;
+    private UserEmail $email;
     private array $roles = [];
     private string $password;
     private string $country;
@@ -24,12 +24,12 @@ class User implements UserInterface
         return Uuid::fromString($this->id);
     }
 
-    public function getEmail(): string
+    public function getEmail(): UserEmail
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(UserEmail $email): self
     {
         $this->email = $email;
 
