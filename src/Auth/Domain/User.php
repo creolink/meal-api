@@ -21,7 +21,7 @@ class User implements UserInterface
 
     public function getId(): UuidInterface
     {
-        return $this->id;
+        return Uuid::fromString($this->id);
     }
 
     public function getEmail(): string

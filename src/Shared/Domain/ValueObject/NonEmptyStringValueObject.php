@@ -3,22 +3,22 @@
 declare(strict_types=1);
 
 namespace App\Shared\Domain\ValueObject;
-use Symfony\Component\Validator\Constraints as Assert;
 
-abstract class NonEmptyStringValueObject
+use InvalidArgumentException;
+
+abstract class NonEmptyStringValueObject extends StringValueObject
 {
-    /**
-     * @Assert\NotBlank
-     */
-    protected string $value;
-
     public function __construct(string $value)
     {
-        $this->value = $value;
+        parent::__construct($value);
+
+        $this->ensureValueIsNotEmpty();
     }
 
-    public function value(): string
+    private function ensureValueIsNotEmpty()
     {
-        return $this->value;
+        if (empty($this->value)) {
+            throw new InvalidArgumentException('Value cannot be empty');
+        }
     }
 }

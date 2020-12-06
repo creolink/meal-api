@@ -3,25 +3,22 @@
 declare(strict_types=1);
 
 namespace App\Shared\Domain\ValueObject;
-use Symfony\Component\Validator\Constraints as Assert;
 
-abstract class EmailObject
+use InvalidArgumentException;
+
+abstract class EmailObject extends StringValueObject
 {
-    /**
-     * @Assert\NotBlank
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
-     * )
-     */
-    private string $email = '';
-
-    public function __construct(string $email)
+    public function __construct(string $value)
     {
-        $this->email = $email;
+        parent::__construct($value);
+
+        $this->ensureEmailIsValid();
     }
 
-    public function value(): string
+    private function ensureEmailIsValid()
     {
-        return $this->email;
+        if (!filter_var($this->value, FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidArgumentException(sprintf('Provided string <%s> is not a valid Email.', $this->value));
+        }
     }
 }
