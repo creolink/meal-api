@@ -12,7 +12,7 @@ class User implements UserInterface
     private UserEmail $email;
     private UserRoles $roles;
     private UserPassword $password;
-    private string $country;
+    private UserCountry $country;
 
     public function __construct()
     {
@@ -65,12 +65,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCountry(): string
+    public function getCountry(): UserCountry
     {
         return $this->country;
     }
 
-    public function setCountry(string $country): self
+    public function setCountry(UserCountry $country): self
     {
         $this->country = $country;
 

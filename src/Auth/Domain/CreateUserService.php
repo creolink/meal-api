@@ -22,16 +22,16 @@ class CreateUserService
     public function create(UserType $userDto): void
     {
         $user = new User();
-        $user->setPassword(new UserPassword($this->encodePassword($user, $userDto->getPassword()->value())));
+        $user->setPassword($this->encodePassword($user, $userDto));
         $user->setEmail($userDto->getEmail());
-        $user->setCountry($userDto->getCountry()->value());
+        $user->setCountry($userDto->getCountry());
         $user->setRoles(new UserRoles());
 
         $this->repository->create($user);
     }
 
-    private function encodePassword(UserInterface $user, string $newUser)
+    private function encodePassword(UserInterface $user, UserType $userDto): UserPassword
     {
-        return $this->encoder->encodePassword($user, $newUser);
+        return new UserPassword($this->encoder->encodePassword($user, $userDto->getPassword()->value()));
     }
 }
