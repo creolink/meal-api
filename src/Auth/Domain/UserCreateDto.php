@@ -2,7 +2,7 @@
 
 namespace App\Auth\Domain;
 
-use Shared\Domain\Aggregate\AggregateRoot;
+use App\Shared\Domain\Aggregate\AggregateRoot;
 
 class UserCreateDto implements AggregateRoot, UserType
 {

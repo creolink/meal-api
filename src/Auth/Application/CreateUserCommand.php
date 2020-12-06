@@ -2,24 +2,21 @@
 
 namespace App\Auth\Application;
 
-use Shared\Domain\Bus\Command\Command;
+use App\Shared\Domain\Bus\Command\Command;
 
 class CreateUserCommand implements Command
 {
     private string $email = '';
     private string $password = '';
     private string $country = '';
-    private string $repeatedPassword = '';
 
     public function __construct(
         ?string $email = '',
         ?string $password = '',
-        ?string $repeatedPassword = '',
         ?string $country = ''
     ) {
         $this->email = $email;
         $this->password = $password;
-        $this->repeatedPassword = $repeatedPassword;
         $this->country = $country;
     }
 
@@ -31,11 +28,6 @@ class CreateUserCommand implements Command
     public function getPassword(): string
     {
         return $this->password;
-    }
-
-    public function getRepeatedPassword(): string
-    {
-        return $this->repeatedPassword;
     }
 
     public function getCountry(): string

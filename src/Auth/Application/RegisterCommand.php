@@ -2,7 +2,7 @@
 
 namespace App\Auth\Application;
 
-use Shared\Domain\Bus\Command\Command;
+use App\Shared\Domain\Bus\Command\Command;
 
 class RegisterCommand implements Command
 {

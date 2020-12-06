@@ -10,7 +10,7 @@ use App\Auth\Domain\UserEmail;
 use App\Auth\Domain\UserPassword;
 use App\Shared\Domain\Bus\Command\CommandHandler;
 
-class RegisterCommandHandler implements CommandHandler
+class CreateUserCommandHandler implements CommandHandler
 {
     private CreateUserService $registerUserBusiness;
 

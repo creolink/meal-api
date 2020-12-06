@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Shared\Domain\Bus\Event;
+namespace App\Shared\Domain\Bus\Event;
 
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;

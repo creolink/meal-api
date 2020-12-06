@@ -3,7 +3,7 @@
 namespace App\Auth\Domain;
 
 use App\Auth\Domain\Exception\InvalidRepeatedPasswordException;
-use Shared\Domain\Aggregate\AggregateRoot;
+use App\Shared\Domain\Aggregate\AggregateRoot;
 
 class UserRegisterDto extends User implements AggregateRoot, UserType
 {
