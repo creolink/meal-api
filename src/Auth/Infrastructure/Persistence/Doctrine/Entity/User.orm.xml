@@ -7,8 +7,10 @@
     <entity name="App\Auth\Domain\User" table="user" repository-class="App\Auth\Infrastructure\Persistence\Doctrine\Repository\UserRepository">
         <id name="id" type="uuid" column="id" length="36" />
         <embedded name="email" class="App\Auth\Domain\UserEmail" use-column-prefix="false" />
-        <field name="roles" type="json_array" column="roles" />
-        <field name="password" type="string" column="password" length="255" />
+<!--        <field name="roles" type="json_array" column="roles" />-->
+        <embedded name="roles" class="App\Auth\Domain\UserRoles" use-column-prefix="false" />
+<!--        <field name="password" type="string" column="password" length="255" />-->
+        <embedded name="password" class="App\Auth\Domain\UserPassword" use-column-prefix="false" />
         <field name="country" type="string" column="country" length="3" />
     </entity>
 </doctrine-mapping>

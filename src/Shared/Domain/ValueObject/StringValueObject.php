@@ -13,6 +13,11 @@ abstract class StringValueObject
         $this->value = $value;
     }
 
+    public function __toString()
+    {
+        return $this->value();
+    }
+
     public function value(): string
     {
         return $this->value;

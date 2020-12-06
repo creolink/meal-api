@@ -22,10 +22,10 @@ class CreateUserService
     public function create(UserType $userDto): void
     {
         $user = new User();
-        $user->setPassword($this->encodePassword($user, $userDto->getPassword()->value()));
+        $user->setPassword(new UserPassword($this->encodePassword($user, $userDto->getPassword()->value())));
         $user->setEmail($userDto->getEmail());
         $user->setCountry($userDto->getCountry()->value());
-        $user->setRoles([UserRoles::ROLE_USER]);
+        $user->setRoles(new UserRoles());
 
         $this->repository->create($user);
     }

@@ -10,8 +10,8 @@ class User implements UserInterface
 {
     private UuidInterface $id;
     private UserEmail $email;
-    private array $roles = [];
-    private string $password;
+    private UserRoles $roles;
+    private UserPassword $password;
     private string $country;
 
     public function __construct()
@@ -43,26 +43,22 @@ class User implements UserInterface
 
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        $roles[] = UserRoles::ROLE_USER;
-
-        return array_unique($roles);
+        return $this->roles->value();
     }
 
-    public function setRoles(array $roles = []): self
+    public function setRoles(UserRoles $roles): self
     {
-        $roles[] = UserRoles::ROLE_USER;
-        $this->roles = array_unique($roles);
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getPassword(): string
+    public function getPassword(): UserPassword
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(UserPassword $password): self
     {
         $this->password = $password;
 

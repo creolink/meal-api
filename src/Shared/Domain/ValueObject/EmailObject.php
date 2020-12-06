@@ -17,7 +17,7 @@ abstract class EmailObject extends StringValueObject
 
     public function __toString()
     {
-        return $this->value;
+        return $this->value();
     }
 
     private function ensureEmailIsValid()
