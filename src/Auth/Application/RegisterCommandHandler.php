@@ -3,6 +3,7 @@
 namespace App\Auth\Application;
 
 use App\Auth\Domain\CreateUserService;
+use App\Auth\Domain\Exception\UserAlreadyExistsException;
 use App\Auth\Domain\UserRegisterDto;
 use App\Auth\Domain\UserCountry;
 use App\Auth\Domain\UserEmail;
@@ -20,13 +21,17 @@ class RegisterCommandHandler// implements CommandHandler
 
     public function handle(RegisterCommand $registerCommand): void
     {
-        $this->registerUserBusiness->create(
-            new UserRegisterDto(
-                new UserEmail($registerCommand->getEmail()),
-                new UserPassword($registerCommand->getPassword()),
-                new UserPassword($registerCommand->getRepeatedPassword()),
-                new UserCountry($registerCommand->getCountry())
-            )
+        $userDto = new UserRegisterDto(
+            new UserEmail($registerCommand->getEmail()),
+            new UserPassword($registerCommand->getPassword()),
+            new UserPassword($registerCommand->getRepeatedPassword()),
+            new UserCountry($registerCommand->getCountry())
         );
+
+        if ($this->registerUserBusiness->checkCanBeRegistered($userDto)) {
+            $this->registerUserBusiness->create($userDto);
+        }
+
+        throw new UserAlreadyExistsException();
     }
 }

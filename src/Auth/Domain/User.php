@@ -17,6 +17,8 @@ class User implements UserInterface
     public function __construct()
     {
         $this->id = Uuid::uuid4();
+
+        $this->setRoles(new UserRoles());
     }
 
     public function getId(): UuidInterface

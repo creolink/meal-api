@@ -5,6 +5,7 @@ namespace App\Auth\Infrastructure\Persistence\Doctrine\Repository;
 use App\Auth\Domain\CreateUserRepositoryInterface;
 use App\Auth\Domain\Exception\InvalidUserDataException;
 use App\Auth\Domain\User;
+use App\Auth\Domain\UserEmail;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -43,6 +44,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $user;
     }
 
+    public function findOneByEmail(UserEmail $email): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.UserEmail = :val')
+            ->setParameter('val', $email->value())
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     /**
      * @throws InvalidUserDataException
      */
@@ -55,6 +66,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             throw new InvalidUserDataException($e->getMessage());
         }
     }
+
 
     // /**
     //  * @return User[] Returns an array of User objects

@@ -19,13 +19,17 @@ class CreateUserService
         $this->validator = $validator;
     }
 
+    public function checkCanBeRegistered(UserType $userDto)
+    {
+        return $this->repository->findOneByEmail($userDto->getEmail()) instanceof UserInterface ? false : true;
+    }
+
     public function create(UserType $userDto): void
     {
         $user = new User();
         $user->setPassword($this->encodePassword($user, $userDto));
         $user->setEmail($userDto->getEmail());
         $user->setCountry($userDto->getCountry());
-        $user->setRoles(new UserRoles());
 
         $this->repository->create($user);
     }
