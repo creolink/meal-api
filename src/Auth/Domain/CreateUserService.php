@@ -2,6 +2,7 @@
 
 namespace App\Auth\Domain;
 
+use App\Auth\Domain\Exception\UserAlreadyExistsException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -19,9 +20,11 @@ class CreateUserService
         $this->validator = $validator;
     }
 
-    public function checkCanBeRegistered(UserType $userDto)
+    public function userAlreadyExists(UserType $userDto): void
     {
-        return $this->repository->findOneByEmail($userDto->getEmail()) instanceof UserInterface ? false : true;
+        if ($this->repository->findOneByEmail($userDto->getEmail()) instanceof UserInterface) {
+            throw new UserAlreadyExistsException();
+        }
     }
 
     public function create(UserType $userDto): void

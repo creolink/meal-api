@@ -4,7 +4,7 @@ namespace App\Auth\Domain;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
 
-class UserCreateDto implements AggregateRoot, UserType
+class UserCreate implements AggregateRoot, UserType
 {
     private UserEmail $email;
     private UserPassword $password;

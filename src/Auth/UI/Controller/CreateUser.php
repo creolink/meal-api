@@ -2,38 +2,37 @@
 
 namespace App\Auth\UI\Controller;
 
-use App\Auth\Application\RegisterCommand;
-use App\Auth\Application\RegisterCommandHandler;
+use App\Auth\Application\CreateUserCommand;
+use App\Auth\Application\CreateUserCommandHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class Register
+class CreateUser
 {
-    private RegisterCommandHandler $commandHandler;
+    private CreateUserCommandHandler $commandHandler;
 
-    public function __construct(RegisterCommandHandler $commandHandler)
+    public function __construct(CreateUserCommandHandler $commandHandler)
     {
         $this->commandHandler = $commandHandler;
     }
 
     /**
-     * @Route("/auth/register", name="register", methods={"POST"})
+     * @Route("/user/create", name="create", methods={"POST"})
      */
     public function __invoke(Request $request): Response
     {
-        $registerCommand = new RegisterCommand(
+        $createCommand = new CreateUserCommand(
             $request->get('email'),
             $request->get('password'),
-            $request->get('repeated_password'),
             $request->get('country'),
         );
 
-        $this->commandHandler->handle($registerCommand);
+        $this->commandHandler->handle($createCommand);
 
         return new JsonResponse([
-            'user' => $registerCommand->getEmail()
+            'user' => $createCommand->getEmail()
         ]);
     }
 }

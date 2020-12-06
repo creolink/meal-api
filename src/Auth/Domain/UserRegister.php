@@ -5,7 +5,7 @@ namespace App\Auth\Domain;
 use App\Auth\Domain\Exception\InvalidRepeatedPasswordException;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 
-class UserRegisterDto extends User implements AggregateRoot, UserType
+class UserRegister extends UserCreate implements AggregateRoot, UserType
 {
     public function __construct(
         UserEmail $email,
@@ -13,11 +13,7 @@ class UserRegisterDto extends User implements AggregateRoot, UserType
         UserPassword $repeatedPassword,
         UserCountry $country
     ) {
-        parent::__construct();
-
-        $this->setEmail($email);
-        $this->setPassword($password);
-        $this->setCountry($country);
+        parent::__construct($email, $password, $country);
 
         $this->validatePasswords($repeatedPassword);
     }
