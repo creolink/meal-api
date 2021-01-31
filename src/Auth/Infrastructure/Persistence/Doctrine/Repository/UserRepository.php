@@ -2,9 +2,10 @@
 
 namespace App\Auth\Infrastructure\Persistence\Doctrine\Repository;
 
+use App\Auth\Domain\Entity\UserPassword;
 use App\Auth\Domain\Exception\InvalidUserDataException;
-use App\Auth\Domain\User;
-use App\Auth\Domain\UserEmail;
+use App\Auth\Domain\Entity\User;
+use App\Auth\Domain\Entity\UserEmail;
 use App\Auth\Domain\UserRepository as DomainRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
@@ -32,7 +33,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 
-        $user->setPassword($newEncodedPassword);
+        $user->setPassword(new UserPassword($newEncodedPassword));
 
         $this->save($user);
     }

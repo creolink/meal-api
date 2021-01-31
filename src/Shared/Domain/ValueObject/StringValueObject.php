@@ -6,11 +6,11 @@ namespace App\Shared\Domain\ValueObject;
 
 abstract class StringValueObject
 {
-    protected string $value;
+    protected ?string $value;
 
-    public function __construct(string $value)
+    public function __construct(?string $value = '')
     {
-        $this->value = $value;
+        $this->value = $value ?? '';
     }
 
     public function __toString()

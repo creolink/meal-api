@@ -11,14 +11,14 @@ security:
             - ROLE_OWNED_MEALS_EDIT
 
     encoders:
-        App\Auth\Domain\User:
+        App\Auth\Domain\Entity\User:
             algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         app_user_provider:
             entity:
-                class: App\Auth\Domain\User
+                class: App\Auth\Domain\Entity\User
                 property: email.value
 
     firewalls:

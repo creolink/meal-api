@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Auth\Domain;
+namespace App\Auth\Domain\Entity;
 
+use App\Shared\Domain\Aggregate\AggregateRoot;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class User implements UserInterface
+class User implements UserInterface, AggregateRoot
 {
     private UuidInterface $id;
     private UserEmail $email;

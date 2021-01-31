@@ -11,9 +11,9 @@ class CreateUserCommand implements Command
     private string $country = '';
 
     public function __construct(
-        ?string $email = '',
-        ?string $password = '',
-        ?string $country = ''
+        string $email = '',
+        string $password = '',
+        string $country = ''
     ) {
         $this->email = $email;
         $this->password = $password;

@@ -2,8 +2,8 @@
 
 namespace App\Auth\UI\Controller;
 
-use App\Auth\Application\RegisterCommand;
-use App\Auth\Application\RegisterCommandHandler;
+use App\Auth\Application\RegisterUserCommand;
+use App\Auth\Application\RegisterUserCommandHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,9 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class Register
 {
-    private RegisterCommandHandler $commandHandler;
+    private RegisterUserCommandHandler $commandHandler;
 
-    public function __construct(RegisterCommandHandler $commandHandler)
+    public function __construct(RegisterUserCommandHandler $commandHandler)
     {
         $this->commandHandler = $commandHandler;
     }
@@ -23,11 +23,11 @@ class Register
      */
     public function __invoke(Request $request): Response
     {
-        $registerCommand = new RegisterCommand(
+        $registerCommand = new RegisterUserCommand(
             $request->get('email'),
             $request->get('password'),
             $request->get('repeated_password'),
-            $request->get('country'),
+            $request->get('country')
         );
 
         $this->commandHandler->handle($registerCommand);

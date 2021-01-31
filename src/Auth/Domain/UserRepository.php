@@ -2,6 +2,7 @@
 
 namespace App\Auth\Domain;
 
+use App\Auth\Domain\Entity\UserEmail;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 interface UserRepository

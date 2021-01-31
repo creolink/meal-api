@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auth\Domain;
+namespace App\Auth\Domain\Entity;
 
 class UserRoles implements \ArrayAccess
 {
@@ -25,12 +25,12 @@ class UserRoles implements \ArrayAccess
         return array_unique($roles);
     }
 
-    public function &__get ($key)
+    public function &__get($key)
     {
         return $this->value[$key];
     }
 
-    public function __set($key,$value)
+    public function __set($key, $value)
     {
         $this->value[$key] = $value;
     }

@@ -8,7 +8,7 @@ use InvalidArgumentException;
 
 abstract class EmailObject extends StringValueObject
 {
-    public function __construct(string $value)
+    public function __construct(?string $value = '')
     {
         parent::__construct($value);
 

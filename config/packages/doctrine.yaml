@@ -13,5 +13,5 @@ doctrine:
             App\Auth\Domain:
                 type: xml
                 dir: '%kernel.project_dir%/src/Auth/Infrastructure/Persistence/Doctrine/Entity'
-                prefix: 'App\Auth\Domain'
+                prefix: 'App\Auth\Domain\Entity'
                 #alias: Auth

@@ -2,6 +2,8 @@
 
 namespace App\Auth\Domain;
 
+use App\Auth\Domain\Entity\User;
+use App\Auth\Domain\Entity\UserPassword;
 use App\Auth\Domain\Exception\UserAlreadyExistsException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
