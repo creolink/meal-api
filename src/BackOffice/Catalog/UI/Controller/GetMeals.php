@@ -1,17 +1,17 @@
 <?php
 
-namespace App\BackOffice\Catalog\Application\Controller;
+namespace App\BackOffice\Catalog\UI\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UpdateMeal
+class GetMeals
 {
     /**
-     * @Route("/meal/{uuid}", methods={"PUT"})
+     * @Route("/meal", methods={"GET"})
      */
     public function __invoke(): Response
     {
-        return new Response("meal updated");
+        return new Response("meals");
     }
 }

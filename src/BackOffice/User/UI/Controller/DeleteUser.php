@@ -1,17 +1,17 @@
 <?php
 
-namespace App\BackOffice\User\Application\Controller;
+namespace App\BackOffice\User\UI\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GetUsers
+class DeleteUser
 {
     /**
-     * @Route("/adm/users", methods={"GET"})
+     * @Route("/adm/user/{uuid}", methods={"DELETE"})
      */
     public function __invoke(): Response
     {
-        return new Response("users");
+        return new Response("user deleted");
     }
 }

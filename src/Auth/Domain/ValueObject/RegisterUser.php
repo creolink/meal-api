@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Auth\Domain;
+namespace App\Auth\Domain\ValueObject;
 
 use App\Auth\Domain\Exception\InvalidRepeatedPasswordException;
+use App\Auth\Domain\UserCountry;
+use App\Auth\Domain\UserEmail;
+use App\Auth\Domain\UserPassword;
+use App\Auth\Domain\UserType;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 
-class UserRegister extends UserCreate implements AggregateRoot, UserType
+class RegisterUser extends NewUser implements AggregateRoot, UserType
 {
     public function __construct(
         UserEmail $email,

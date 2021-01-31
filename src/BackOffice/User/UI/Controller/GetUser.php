@@ -1,17 +1,17 @@
 <?php
 
-namespace App\BackOffice\Catalog\Application\Controller;
+namespace App\BackOffice\User\UI\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DeleteMeal
+class GetUser
 {
     /**
-     * @Route("/meal/{uuid}", methods={"DELETE"})
+     * @Route("/adm/user/{uuid}", methods={"GET"})
      */
     public function __invoke(): Response
     {
-        return new Response("meal deleted");
+        return new Response("user");
     }
 }

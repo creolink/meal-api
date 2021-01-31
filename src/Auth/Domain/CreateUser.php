@@ -7,24 +7,20 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class CreateUserService
+class CreateUser
 {
-    private CreateUserRepositoryInterface $repository;
+    private UserRepository $repository;
     private UserPasswordEncoderInterface $encoder;
     private ValidatorInterface $validator;
 
-    public function __construct(CreateUserRepositoryInterface $repository, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator)
-    {
+    public function __construct(
+        UserRepository $repository,
+        UserPasswordEncoderInterface $encoder,
+        ValidatorInterface $validator
+    ) {
         $this->repository = $repository;
         $this->encoder = $encoder;
         $this->validator = $validator;
-    }
-
-    public function userAlreadyExists(UserType $userDto): void
-    {
-        if ($this->repository->findOneByEmail($userDto->getEmail()) instanceof UserInterface) {
-            throw new UserAlreadyExistsException();
-        }
     }
 
     public function create(UserType $userDto): void
@@ -34,7 +30,14 @@ class CreateUserService
         $user->setEmail($userDto->getEmail());
         $user->setCountry($userDto->getCountry());
 
-        $this->repository->create($user);
+        $this->repository->save($user);
+    }
+
+    public function checkAlreadyRegistered(UserType $userDto): void
+    {
+        if ($this->repository->findOneByEmail($userDto->getEmail()) instanceof UserInterface) {
+            throw new UserAlreadyExistsException();
+        }
     }
 
     private function encodePassword(UserInterface $user, UserType $userDto): UserPassword

@@ -4,8 +4,8 @@ namespace App\Auth\Domain;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-interface CreateUserRepositoryInterface
+interface UserRepository
 {
-    public function create(UserInterface $user);
+    public function save(UserInterface $user);
     public function findOneByEmail(UserEmail $email): ?UserInterface;
 }

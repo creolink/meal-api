@@ -9,6 +9,7 @@ auth:
     type: annotation
     defaults:
         _format: json
+
 #
 #backoffice:
 #    resource: ../../src/BackOffice/Controller/

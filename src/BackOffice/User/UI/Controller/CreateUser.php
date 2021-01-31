@@ -1,17 +1,17 @@
 <?php
 
-namespace App\BackOffice\User\Application\Controller;
+namespace App\BackOffice\User\UI\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GetUser
+class CreateUser
 {
     /**
-     * @Route("/adm/user/{uuid}", methods={"GET"})
+     * @Route("/adm/user", methods={"POST"})
      */
     public function __invoke(): Response
     {
-        return new Response("user");
+        return new Response("users");
     }
 }

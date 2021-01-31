@@ -2,10 +2,10 @@
 
 namespace App\Auth\Infrastructure\Persistence\Doctrine\Repository;
 
-use App\Auth\Domain\CreateUserRepositoryInterface;
 use App\Auth\Domain\Exception\InvalidUserDataException;
 use App\Auth\Domain\User;
 use App\Auth\Domain\UserEmail;
+use App\Auth\Domain\UserRepository as DomainRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, CreateUserRepositoryInterface
+class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, DomainRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -37,22 +37,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user);
     }
 
-    public function create(UserInterface $user): UserInterface
-    {
-        $this->save($user);
-
-        return $user;
-    }
-
-    public function findOneByEmail(UserEmail $email): ?UserInterface
-    {
-        return $this->findOneBy(['email.value' => $email->value()]);
-    }
-
     /**
      * @throws InvalidUserDataException
      */
-    private function save(UserInterface $user): void
+    public function save(UserInterface $user): void
     {
         try {
             $this->_em->persist($user);
@@ -61,6 +49,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             throw new InvalidUserDataException($e->getMessage());
         }
     }
+
+    public function delete(UserInterface $user): void
+    {
+        try {
+            $this->_em->remove($user);
+            $this->_em->flush();
+        } catch (ORMException $e) {
+            throw new InvalidUserDataException($e->getMessage());
+        }
+    }
+
+    public function findOneByEmail(UserEmail $email): ?UserInterface
+    {
+        return $this->findOneBy(['email.value' => $email->value()]);
+    }
+
+
 
 
     // /**
